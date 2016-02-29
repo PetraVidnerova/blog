@@ -69,8 +69,8 @@ class item:
 
     def reduce_title(self):
         del_strings = [ "| AVObloguje", "| Nationality Rooms", "| University of Pittsburgh",
-                        "- iDNES.cz", "- Živě.cz", "- Science News", "| Meteor", "| Popular Science" 
-                        "| CZELO | Česká styčná kancelář pro výzkum, vývoj"        ] 
+                        "- iDNES.cz", "– Živě.cz", "- Science News", "| Meteor", "| Popular Science" , 
+                        "| CZELO | Česká styčná kancelář pro výzkum, vývoj"] 
         for s in del_strings:
             self.title = self.title.replace(s,"") 
 
