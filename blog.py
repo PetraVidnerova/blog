@@ -55,7 +55,8 @@ class item:
                     ("vtm","vtm"),
                     ("avobloguje","AVObloguje"),
                     ("pitt.edu","pitt.edu"),
-                    ("sciencenews.org","sciencenews") ]
+                    ("sciencenews.org","sciencenews"),
+                    ("matfyz.cz","Matfyz")        ]
         # Go through sources and return first match. 
         for s in sources:
             if re.findall(s[0],href): return s[1] 
@@ -63,21 +64,26 @@ class item:
 
     def make_title(self):
         print("Downloading",self.href,file=sys.stderr)
-        webpage = url.urlopen(self.href).read()
-        soup = BeautifulSoup(webpage,"lxml") 
-        self.title = soup.title.string  
+        try:
+            webpage = url.urlopen(self.href).read()
+            soup = BeautifulSoup(webpage,"lxml") 
+            self.title = soup.title.string  
+        except:
+            self.title = "no title"
+
 
     def reduce_title(self):
         del_strings = [ "| AVObloguje", "| Nationality Rooms", "| University of Pittsburgh",
                         "- iDNES.cz", "– Živě.cz", "- Science News", "| Meteor", "| Popular Science" , 
-                        "| CZELO | Česká styčná kancelář pro výzkum, vývoj"] 
+                        "| CZELO | Česká styčná kancelář pro výzkum, vývoj", "- ČeskéNoviny.cz",
+                        "- Vesmír", "- Deník.cz", "| IFLScience"] 
         for s in del_strings:
             self.title = self.title.replace(s,"") 
 
     def __init__(self,line):
         self.href = re.findall("href=\"(.*?)\"",line)[0] 
         self.title = re.findall("<a href=.*>(.*?)</a>",line)[0] 
-        if "http" in self.title:
+        if "http" in self.title or self.title=="undefined":
             self.make_title()
         self.reduce_title() 
         self.tag =  re.findall("\ tags=\"(.*?)\"",line)[0]
