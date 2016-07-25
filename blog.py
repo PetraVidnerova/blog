@@ -9,8 +9,9 @@ SOURCES = []
 # Load sources from file.
 with open("sources.txt") as sourcefile:
     for line in sourcefile:
+        print(line)
         source, abbrev = line.split(None, 2)
-        SOURCES.append(source, abbrev)
+        SOURCES.append((source, abbrev))
 
 DEL_STRINGS = []
 with open("del_strings.txt") as delfile:
