@@ -5,18 +5,18 @@ import urllib.request as url
 from bs4 import BeautifulSoup
 
 SOURCES = []
+DEL_STRINGS = [] 
 
 # Load sources from file.
-with open("sources.txt") as sourcefile:
+with open("sources.txt", encoding="utf-8") as sourcefile:
     for line in sourcefile:
         source, abbrev = line.split(None, 2)
         SOURCES.append((source, abbrev))
 
-DEL_STRINGS = []
-with open("del_strings.txt") as delfile:
+with open("del_strings.txt", encoding="utf-8") as delfile:
     for line in delfile:
-        line.strip()
-        DEL_STRINGS.append(line)
+        DEL_STRINGS.append(line.strip())
+        
 
 
 class item:
@@ -31,16 +31,21 @@ class item:
     def make_title(self):
         print("Downloading", self.href, file=sys.stderr)
         try:
-            webpage = url.urlopen(self.href).read()
+            webpage = url.urlopen(self.href).read() 
             soup = BeautifulSoup(webpage, "lxml")
+
+            # extract encoding from <meta charset=".*"/>  
+            #encoding = soup.findAll("meta", attrs={"charset" : re.compile(".*")})[0].get("charset")
+            
             self.title = soup.title.string
+
         except:
             self.title = "no title"
 
     def reduce_title(self):
         for s in DEL_STRINGS:
             self.title = self.title.replace(s, "")
-
+            
     def __init__(self, line):
         self.href = re.findall("href=\"(.*?)\"", line)[0]
         self.title = re.findall("<a href=.*>(.*?)</a>", line)[0]
