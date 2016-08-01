@@ -2,39 +2,45 @@ import os.path
 import time
 import blog
 
-source = "ril_export.html"
-print(
-    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />")
-print("<!-- Source:", source +
-      str(time.ctime(os.path.getmtime(source))), "-->")
+SOURCE = "ril_export.html"
+print("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />")
+print("<!-- Source:", SOURCE +
+      str(time.ctime(os.path.getmtime(SOURCE))), "-->")
 
-
+# create list of blog items 
 items = []
-for line in open(source):
+for line in open(SOURCE):
     line = line.strip()
     if "<li>" in line:
         items.append(blog.item(line))
 
-tags = ["veda", "skolstvi", "vyzvy", "akce",
-        "ai", "kyber", "robotika", "genetika",
-        "mozek", "klima", "pocasi", "tools",
-        "ruzne"]
 
-names = ["Věda", "Školství", "Výzvy", "Akce",
-         "Umělá inteligence", "Kybernetická bezpečnost",
-         "Robotika", "Genetika",
-         "Mozek", "Klimatologie", "Počasí", "Užitečné nástroje",
-         "Různé"]
+# create list of categories - pairs (tag, caption) 
+CATEGORIES = [] 
+with open("category.txt", encoding="utf-8") as cfile:
+    for line in cfile:
+        line = line.strip() 
+        if line:
+            words = line.split(None) 
+            tag = words[0]
+            caption = " ".join(words[1:])
+            CATEGORIES.append((tag, caption))
 
-for t in range(len(tags)):
 
-    print("<!--", tags[t], "-->")
-    tag_items = [x for x in items if x.tag == tags[t]]
+# go through categories and for each tag find 
+# corresponding items and print the group 
+# with caption 
+for tag, caption in CATEGORIES:
+    print("<!--", tag, "-->")
+
+    # find all items for the given tag 
+    tag_items = (x for x in items if x.tag == tag)
     if not tag_items:
         print("<!-- dneska nic :( -->")
     else:
-        print("<b>", names[t], "</b>")
+        # list items 
+        print("<b>", caption, "</b>")
         print("<ul>")
-        for i in tag_items:
-            print(i)
+        for item in tag_items:
+            print(item)
         print("</ul>")

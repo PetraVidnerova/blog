@@ -1,0 +1,16 @@
+veda              Věda			       
+skolstvi	  Školství 		       
+vyzvy		  Výzvy 			       
+akce		  Akce			       
+ai 		  Umělá inteligence 	       
+kyber 		  Kybernetická bezpečnost	       
+robotika 	  Robotika 		       
+genetika	  Genetika		       
+mozek 		  Mozek 			       
+klima 		  Klimatologie 		       
+pocasi 		  Počasí 			       
+tools 		  Užitečné nástroje	       
+ruzne		  Různé
+
+
+
