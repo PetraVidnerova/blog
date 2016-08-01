@@ -1,5 +1,5 @@
 sciencebusiness				sciencebusiness  
-metodikahodnoceni.blogspot.cz		Daniel Műnich 
+metodikahodnoceni.blogspot.cz		Daniel_Műnich 
 ceskapozice 				ceskapozice  			
 czelo 					czelo  
 tacr 					tacr  
@@ -26,7 +26,7 @@ vedazije.cz 				vedazije
 ssc.cas.cz 				ssc.cas 
 discovery.com 				discovery 
 blog.oup.com 				blog.oup 
-mit.edu      				MIT News 
+mit.edu      				MITNews 
 it4i.cz 				it4i 
 jcmf.cz 				jcmf 
 denik.cz 				Deník.cz 
@@ -61,5 +61,5 @@ engadget.com  				engadget.com
 idnes.cz  				iDnes 
 nytimes.com  				nytimes.com 
 iflscience.com  			iflscience 
-nickhigham.wordpress.com 		Nick Highman
-
+nickhigham.wordpress.com 		Nick_Highman
+muni.cz                                 muni.cz
